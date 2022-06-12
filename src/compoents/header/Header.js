@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Header(props) {
     return (
-        <div className="main-header">
+        <div className="main-header">   
             <div id="topbar" className="d-flex align-items-center fixed-top">
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
