@@ -8,6 +8,7 @@ import Department from './containers/department/Department';
 import Doctor from './containers/doctors/Doctor';
 import Aboutus from './containers/about us/Aboutus';
 import Contact from './containers/contact/Contact';
+import Auth from './auth/Auth';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path={"/doctors"} exact component={Doctor}></Route>
             <Route path={"/aboutus"} exact component={Aboutus}></Route>
             <Route path={"/contact"} exact component={Contact}></Route>
+            <Route path={"/Auth"} exact component={Auth}></Route>
         </Switch>
         
         <Footer />
