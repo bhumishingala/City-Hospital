@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card ,CardBody,CardTitle,CardSubtitle,CardText} from 'reactstrap'
+import { Card ,CardBody,CardTitle,CardSubtitle,CardText} from 'reactstrap';
 
 function List({ data }) {
     {
         data.map((o, i) => {
             return (
-                <div>
+                <div key={i}>
                     <Card>
                         <CardBody>
                             <CardTitle tag="h5">

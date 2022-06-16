@@ -1,6 +1,7 @@
 import React from 'react';
 import List from '../../compoents/list/List';
 
+
 function Medicines(props) {
     const orgData = [
         {
