@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
 
-function List({ data }) {
+function List({ data , getId }) {
     return (
         <div>
             {
@@ -22,6 +22,7 @@ function List({ data }) {
                                     <CardText>
                                         {o.expiry}
                                     </CardText>
+                                    <Button onClick={() => getId(o.id)}>Click</Button>
                                 </CardBody>
                             </Card>
                         </div>

@@ -41,9 +41,16 @@ function Medicines(props) {
         },
     ]
 
+    const get = (id) => {
+        console.log(id);
+    }
+
     return (
         <div>
-            <List data={orgData} />
+            <List 
+                data={orgData} 
+                getId = {get}
+            />
         </div>
     );
 }
