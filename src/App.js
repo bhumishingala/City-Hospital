@@ -8,25 +8,25 @@ import Department from './containers/department/Department';
 import Doctor from './containers/doctors/Doctor';
 import Aboutus from './containers/about us/Aboutus';
 import Contact from './containers/contact/Contact';
-import Auth from './auth/Auth';
+import Auth from './containers/auth/Auth';
 import Medicines from './containers/medicines/Medicines';
 import Refexample from './containers/refexample/Refexample';
 
 function App() {
   return (
     <div>
-        <Header />
-          <Switch>
-              <Route path={"/"} exact component={Home}></Route>
-              <Route path={"/department"} exact component={Department}></Route>
-              <Route path={"/doctors"} exact component={Doctor}></Route>
-              <Route path={"/aboutus"} exact component={Aboutus}></Route>
-              <Route path={"/contact"} exact component={Contact}></Route>
-              <Route path={"/Auth"} exact component={Auth}></Route>
-              <Route path={"/medicines"} exact component={Medicines} />
-              <Route path={"/refexample"} exact component={Refexample}/>
-          </Switch>        
-        <Footer />
+      <Header />
+      <Switch>
+        <Route path={"/"} exact component={Home}></Route>
+        <Route path={"/department"} exact component={Department}></Route>
+        <Route path={"/doctors"} exact component={Doctor}></Route>
+        <Route path={"/aboutus"} exact component={Aboutus}></Route>
+        <Route path={"/contact"} exact component={Contact}></Route>
+        <Route path={"/Auth"} exact component={Auth}></Route>
+        <Route path={"/medicines"} exact component={Medicines} ></Route>
+        <Route path={"/refexample"} exact component={Refexample}></Route>
+      </Switch>
+      <Footer />
     </div>
   );
 }
