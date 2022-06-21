@@ -11,7 +11,7 @@ function Auth(props) {
     if(usertype === "Login") {
         schemaObj = {
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
-            password: yup.string().required("Please Enter Password."),
+            password: yup.string().required("Please Enter Password.")
         }
         initval = {
             email: '',
@@ -21,12 +21,19 @@ function Auth(props) {
         schemaObj = {
             name : yup.string().required("Please enter Name."),
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
-            password: yup.string().required("Please Enter Password."),
+            password: yup.string().required("Please Enter Password.")
         }
         initval = {
             name :'',
             email: '',
             password: ''
+        }
+    }else if(reset == "true"){
+        schemaObj = {
+            email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id.")
+        }
+        initval = {
+            email: ''
         }
     }
 
@@ -101,11 +108,11 @@ function Auth(props) {
                         }
                         {
                             usertype === "Login" ?
-                                <p>create an account ?<button onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</button></p>
+                                <p>create an account ?<a onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</a></p>
                                 :
-                                <p>allready account ?<button onClick={() => { setReset("false"); setUsertype("Login") }}>Login</button></p>
+                                <p>allready account ?<a onClick={() => { setReset("false"); setUsertype("Login") }}>Login</a></p>
                         }
-                        <button onClick={() => setReset("true")}>Forgot Your Password ?</button>
+                        <a onClick={() => setReset("true")}>Forgot Your Password ?</a>
                     </Form>
                 </Formik>
             </div>
