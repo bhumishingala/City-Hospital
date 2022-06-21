@@ -6,8 +6,8 @@ function Contact(props) {
     let schema = yup.object().shape({
         name: yup.string().required("Please Enter Name."),
         email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
-        subject : yup.string().max(25,"It's to 25 character").required(),
-        message : yup.string().required("Please Enter Any message."),
+        subject : yup.string().max(25,"It's to 25 character").required("Please Enter Subject."),
+        message : yup.string().required("Please Enter Any message.")
     });
 
     const formik = useFormik({

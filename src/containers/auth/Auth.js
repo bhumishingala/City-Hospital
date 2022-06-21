@@ -6,9 +6,9 @@ function Auth(props) {
     const [usertype, setUsertype] = useState("Login");
     const [reset, setReset] = useState("false");
 
-    let schemaObj , initval;
+    let schemaObj, initval;
 
-    if(usertype === "Login") {
+    if (usertype === "Login") {
         schemaObj = {
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
             password: yup.string().required("Please Enter Password.")
@@ -17,18 +17,18 @@ function Auth(props) {
             email: '',
             password: ''
         }
-    }else if(usertype === "Signup") {
+    } else if (usertype === "Signup") {
         schemaObj = {
-            name : yup.string().required("Please enter Name."),
+            name: yup.string().required("Please enter Name."),
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
             password: yup.string().required("Please Enter Password.")
         }
         initval = {
-            name :'',
+            name: '',
             email: '',
             password: ''
         }
-    }else if(reset == "true"){
+    } else if (reset == "true") {
         schemaObj = {
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id.")
         }
@@ -46,10 +46,10 @@ function Auth(props) {
             alert(JSON.stringify(values, null, 2));
         },
 
-        enableReinitialize :true
+        enableReinitialize: true
     });
 
-    const { handleChange, errors, handleSubmit , handleBlur , touched} = formik;
+    const { handleChange, errors, handleSubmit, handleBlur, touched } = formik;
 
     return (
         <section id="appointment" className="appointment">
@@ -66,7 +66,7 @@ function Auth(props) {
                     }
                 </div>
                 <Formik values={formik}>
-                    <Form onSubmit={handleSubmit} className="php-ema il-form">
+                    <Form onSubmit={handleSubmit} className="php-email-form">
                         <div className="row">
                             {
                                 reset === "true" ?
@@ -76,16 +76,16 @@ function Auth(props) {
                                         null
                                         :
                                         <div className="col-md-4 form-group">
-                                            <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars"  
-                                            onChange={handleChange} onBlur={handleBlur}/>
-                                            <p>{errors.name && touched.name ? errors.name : ''}</p>
+                                            <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                                onChange={handleChange} onBlur={handleBlur} />
+                                            <p className='text-danger'>{errors.name && touched.name ? errors.name : ''}</p>
                                         </div>
                             }
-                        </div>  
+                        </div>
                         <div className='row'>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
-                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur}/>
-                                <p>{errors.email && touched.email ? errors.email : ''}</p>
+                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur} />
+                                <p className='text-danger'>{errors.email && touched.email ? errors.email : ''}</p>
                             </div>
                         </div>
                         {
@@ -94,27 +94,27 @@ function Auth(props) {
                                 :
                                 <div className='row'>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
-                                        <input type="password" className="form-control" name="password" id="password" placeholder="Your password"  onChange={handleChange} onBlur={handleBlur}/>
-                                        <p>{errors.password && touched.password ? errors.password : ''}</p>
+                                        <input type="password" className="form-control" name="password" id="password" placeholder="Your password" onChange={handleChange} onBlur={handleBlur} />
+                                        <p className='text-danger'>{errors.password && touched.password ? errors.password : ''}</p>
                                     </div>
                                 </div>
                         }
                         {
                             reset === "true" ?
-                                <div class="text-center"><button type="submit">Submit</button></div>
+                                <div className="text-center"><button type="submit">Submit</button></div>
                                 :
                                 usertype === "Login" ?
-                                    <div class="text-center"><button type="submit">Login</button></div>
+                                    <div className="text-center"><button type="submit">Login</button></div>
                                     :
-                                    <div class="text-center"><button type="submit">Signup</button></div>
+                                    <div className="text-center"><button type="submit">Sign UP</button></div>
                         }
                         {
                             usertype === "Login" ?
-                                <p>create an account ?<a onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</a></p>
+                                <p className='mt-4'>create an account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</a></p>
                                 :
-                                <p>allready account ?<a onClick={() => { setReset("false"); setUsertype("Login") }}>Login</a></p>
+                                <p className='mt-4'>allready account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Login") }}>Login</a></p>
                         }
-                        <a onClick={() => setReset("true")}>Forgot Your Password ?</a>
+                        <a class='text-orange' onClick={() => setReset("true")}>Forgot Your Password ?</a>
                     </Form>
                 </Formik>
             </div>
