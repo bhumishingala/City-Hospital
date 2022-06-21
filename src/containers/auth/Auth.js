@@ -45,6 +45,8 @@ function Auth(props) {
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
+
+        enableReinitialize :true
     });
 
     const { handleChange, errors, handleSubmit , handleBlur , touched} = formik;
@@ -64,7 +66,7 @@ function Auth(props) {
                     }
                 </div>
                 <Formik values={formik}>
-                    <Form onSubmit={handleSubmit} className="php-email-form">
+                    <Form onSubmit={handleSubmit} className="php-ema il-form">
                         <div className="row">
                             {
                                 reset === "true" ?

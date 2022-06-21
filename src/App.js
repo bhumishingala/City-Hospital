@@ -11,6 +11,7 @@ import Contact from './containers/contact/Contact';
 import Auth from './containers/auth/Auth';
 import Medicines from './containers/medicines/Medicines';
 import Refexample from './containers/refexample/Refexample';
+import Apponiment from './containers/appoinment/Apponiment';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path={"/Auth"} exact component={Auth}></Route>
         <Route path={"/medicines"} exact component={Medicines} ></Route>
         <Route path={"/refexample"} exact component={Refexample}></Route>
+        <Route path={"/appoinment"} exact component={Apponiment}></Route>
       </Switch>
       <Footer />
     </div>
