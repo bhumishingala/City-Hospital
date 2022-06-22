@@ -3,15 +3,13 @@ import React from 'react';
 import * as yup from 'yup';
 
 function Appointment(props) {
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
     let schema = yup.object().shape({
         name: yup.string().required("Please Enter Name."),
         email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
-        phone: yup.number().typeError("Please Enter Vaild Number").min(10).required("Please Enter Phone Number."),
+        phone: yup.string().matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Enter a valid phone number').min(10,"too short").required('Phone number is required'),
         date: yup.string().required("Please Enter Any Date."),
         department: yup.string().required("Please Select Any Department."),
-        message : yup.string(),
+        message: yup.string(),
     });
 
     const formik = useFormik({
@@ -21,7 +19,7 @@ function Appointment(props) {
             phone: '',
             date: '',
             department: '',
-            message : '',
+            message: '',
         },
         validationSchema: schema,
         onSubmit: values => {
