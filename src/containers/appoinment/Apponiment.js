@@ -6,7 +6,7 @@ function Appointment(props) {
     let schema = yup.object().shape({
         name: yup.string().required("Please Enter Name."),
         email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
-        phone: yup.string().matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Enter a valid phone number').min(10,"too short").required('Phone number is required'),
+        phone: yup.string().matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Enter a valid phone number').min(10, "too short").required('Phone number is required'),
         date: yup.string().required("Please Enter Any Date."),
         department: yup.string().required("Please Select Any Department."),
         message: yup.string(),
