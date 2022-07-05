@@ -11,7 +11,9 @@ import Contact from './containers/contact/Contact';
 import Auth from './containers/auth/Auth';
 import Medicines from './containers/medicines/Medicines';
 import Refexample from './containers/refexample/Refexample';
-import Apponiment from './containers/appoinment/Apponiment';
+import Apponiment from './containers/appoinment/Bookappo';
+import Bookappo from './containers/appoinment/Bookappo';
+import Listappo from './containers/appoinment/Listappo';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path={"/medicines"} exact component={Medicines} ></Route>
         <Route path={"/refexample"} exact component={Refexample}></Route>
         <Route path={"/appoinment"} exact component={Apponiment}></Route>
+        <Route path={"/Book_apt"} exact component={Bookappo}></Route>
+        <Route path={"/list_apt"} exact component={Listappo}></Route>
       </Switch>
       <Footer />
     </div>

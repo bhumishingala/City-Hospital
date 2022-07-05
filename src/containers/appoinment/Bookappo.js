@@ -1,15 +1,18 @@
 import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
 function Appointment(props) {
+    const history = useHistory();
+
     let schema = yup.object().shape({
         name: yup.string().required("Please Enter Name."),
         email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
         phone: yup.string().matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Enter a valid phone number').min(10, "too short").required('Phone number is required'),
         date: yup.string().required("Please Enter Any Date."),
         department: yup.string().required("Please Select Any Department."),
-        message: yup.string(),
+        message: yup.string().required("Please enter Message."),
     });
 
     const formik = useFormik({
@@ -23,12 +26,31 @@ function Appointment(props) {
         },
         validationSchema: schema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            handleInsert(values);
+            history.push("/list_apt");
         },
-        enableReinitialize: true
     });
 
     const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
+
+    const handleInsert = (values) => {
+        let localData = JSON.parse(localStorage.getItem("book-apt"));
+
+        let id = Math.floor(Math.random()*10000);
+        let data =  {
+            id :id,
+            ...values
+        }
+
+        if(localData === null){
+            localStorage.setItem("book-apt", JSON.stringify([data]));
+        }else{
+            localData.push(data);
+            localStorage.setItem("book-apt",JSON.stringify(localData));
+        }
+
+        console.log([data]);
+    }
 
     return (
         <div>
@@ -36,13 +58,18 @@ function Appointment(props) {
                 <section id="appointment" className="appointment">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Make an Appointment</h2>
-                            <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
-                                blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
-                                Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
+                            <h2>Book an Appointment</h2>
+                        </div>
+                        <div className='row text-center mb-4'>
+                            <div className='col-6'>
+                                <NavLink exact to={"/Book_apt"}>Book an Appointment</NavLink>
+                            </div>
+                            <div className='col-6'>
+                                <NavLink exact to={"/list_apt"}>List an Appointment</NavLink>
+                            </div>
                         </div>
                         <Formik values={formik}>
-                            <Form action method="post" role="form" onSubmit={handleSubmit} className="php-email-form">
+                            <Form  onSubmit={handleSubmit} className="php-email-form">
                                 <div className="row">
                                     <div className="col-md-4 form-group">
                                         <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
@@ -74,6 +101,7 @@ function Appointment(props) {
                                 </div>
                                 <div className="form-group mt-3">
                                     <textarea className="form-control" name="message" rows={5} onChange={handleChange} onBlur={handleBlur} placeholder="Message (Optional)" defaultValue={""} />
+                                    {errors.message && touched.message ? <p className='text-danger'>{errors.message}</p> : ''}
                                 </div>
                                 <div className="mb-3">
                                     <div className="loading">Loading</div>
