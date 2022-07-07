@@ -29,9 +29,10 @@ function Listappo(props) {
     }
 
     const  redirectB_app = (id) => {
-        history.push("/Book_apt", {id :id});
-        console.log(this.props.location.state.id);
-        console.log(id);
+        history.push("/Book_apt",history.location.state);
+        // console.log(this.props.location.state.id);
+        // console.log(id);
+        console.log(history,id,history.location.state);
     }
 
     return (
