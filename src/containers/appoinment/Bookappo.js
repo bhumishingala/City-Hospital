@@ -1,5 +1,5 @@
 import { Form, Formik, useFormik } from 'formik';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
@@ -31,7 +31,7 @@ function Appointment(props) {
         },
     });
 
-    const { handleChange, errors, handleSubmit, touched, handleBlur ,values} = formik;
+    const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
 
     const handleInsert = (values) => {
         let localData = JSON.parse(localStorage.getItem("book-apt"));
@@ -72,25 +72,25 @@ function Appointment(props) {
                             <Form  onSubmit={handleSubmit} className="php-email-form">
                                 <div className="row">
                                     <div className="col-md-4 form-group">
-                                        <input type="text" value={values.name} name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
+                                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
                                         <p className='text-danger'>{errors.name && touched.name ? errors.name : ''}</p>
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
-                                        <input type="text" value={values.email} className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" onChange={handleChange} onBlur={handleBlur} />
+                                        <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" onChange={handleChange} onBlur={handleBlur} />
                                         <p className='text-danger'>{errors.email && touched.email ? errors.email : ''}</p>
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
-                                        <input type="tel" value={values.phone} className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
+                                        <input type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
                                         <p className='text-danger'>{errors.phone && touched.phone ? errors.phone : ''}</p>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-4 form-group mt-3">
-                                        <input type="date" value={values.date} name="date" className="form-control datepicker" id="date" placeholder="DD-MM-YY" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
+                                        <input type="date" name="date" className="form-control datepicker" id="date" placeholder="DD-MM-YY" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onChange={handleChange} onBlur={handleBlur} />
                                         <p className='text-danger'>{errors.date && touched.date ? errors.date : ''}</p>
                                     </div>
                                     <div className="col-md-4 form-group mt-3">
-                                        <select name="department" value={values.department} id="department" className="form-select" onChange={handleChange} onBlur={handleBlur}>
+                                        <select name="department" id="department" className="form-select" onChange={handleChange} onBlur={handleBlur}>
                                             <option value>Select Department</option>
                                             <option value="Department 1">Department 1</option>
                                             <option value="Department 2">Department 2</option>
@@ -100,7 +100,7 @@ function Appointment(props) {
                                     </div>
                                 </div>
                                 <div className="form-group mt-3">
-                                    <textarea className="form-control" value={values.message} name="message" rows={5} onChange={handleChange} onBlur={handleBlur} placeholder="Message (Optional)" defaultValue={""} />
+                                    <textarea className="form-control" name="message" rows={5} onChange={handleChange} onBlur={handleBlur} placeholder="Message (Optional)" defaultValue={""} />
                                     {errors.message && touched.message ? <p className='text-danger'>{errors.message}</p> : ''}
                                 </div>
                                 <div className="mb-3">
@@ -108,14 +108,7 @@ function Appointment(props) {
                                     <div className="error-message" />
                                     <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                                 </div>
-                                <div className="text-center">
-                                    {
-                                        update ?
-                                            <button type="submit">update an Appointment</button>
-                                        :
-                                            <button type="submit">Make an Appointment</button>
-                                    }
-                                </div>
+                                <div className="text-center"><button type="submit">Make an Appointment</button></div>
                             </Form>
                         </Formik>
                     </div>

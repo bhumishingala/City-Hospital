@@ -8,7 +8,7 @@ function Listappo(props) {
     let [data, setData] = useState([]);
 
     const gData = () => {
-        let localData = JSON.parse(localStorage.getItem("book-apt"));
+        let localData = localStorage.getItem("book-apt");
 
         setData(localData);
     }
@@ -22,14 +22,17 @@ function Listappo(props) {
 
         let fData = localData.filter((f) => f.id !== id);
 
-        localStorage.setItem("book-apt",JSON.stringify(fData));
+        localStorage.setItem("book-apt", JSON.stringify(fData));
 
-        console.log(fData,localData);
+        console.log(fData, localData);
         gData();
     }
 
-    const  redirectB_app = (id) => {
-        history.push("/Book_apt",{id :id});
+    const redirectB_app = (id) => {
+        history.push("/Book_apt", history.location.state);
+        // console.log(this.props.location.state.id);
+        // console.log(id);
+        console.log(history, id, history.location.state);
     }
 
     return (
@@ -39,39 +42,41 @@ function Listappo(props) {
                     <div className="container">
                         <div className="section-title">
                             <h2>List an Appointment</h2>
-                        </div>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <NavLink exact to={"/Book_apt"} >Book An Appointment</NavLink>
+                            <div className='row'>
+                                <div className='col-6'>
+                                    <NavLink exact to={"/Book_apt"} >Book An Appointment</NavLink>
+                                </div>
+                                <div className='col-6'>
+                                    <NavLink exact to={"/list_apt"} >List An Appointment</NavLink>
+                                </div>
                             </div>
-                            <div className='col-6'>
-                                <NavLink exact to={"/list_apt"} >List An Appointment</NavLink>
-                            </div>
                         </div>
-                        {
-                            data.map((d , i) => {
-                                return (
-                                    <Card key={i}>
-                                        <CardBody>
-                                            <CardTitle tag="h5">
-                                                {d.name}
-                                            </CardTitle>
-                                            <CardSubtitle
-                                                className="mb-2 text-muted"
-                                                tag="h6"
-                                            >
-                                                {d.email}
-                                            </CardSubtitle>
-                                            <CardText>
-                                              {d.phone}
-                                            </CardText>
-                                            <Button onClick={() => redirectB_app(d.id)}>Edit</Button>
-                                            <Button onClick={() => handleDelete(d.id)}>Delete</Button>
-                                        </CardBody>
-                                    </Card>
-                                )
-                            })
-                        }
+                        <div>
+                            {
+                                data.map((d, i) => {
+                                    return (
+                                        <Card key={i}>
+                                            <CardBody>
+                                                <CardTitle tag="h5">
+                                                    {d.name}
+                                                </CardTitle>
+                                                <CardSubtitle
+                                                    className="mb-2 text-muted"
+                                                    tag="h6"
+                                                >
+                                                    {d.email}
+                                                </CardSubtitle>
+                                                <CardText>
+                                                    {d.phone}
+                                                </CardText>
+                                                <Button onClick={() => redirectB_app(d.id)}>Edit</Button>
+                                                <Button onClick={() => handleDelete(d.id)}>Delete</Button>
+                                            </CardBody>
+                                        </Card>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </section>
             </main>
