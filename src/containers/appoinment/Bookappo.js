@@ -114,7 +114,6 @@ function Appointment(props) {
                     </div>
                 </section>
             </main>
-
         </div>
     );
 }

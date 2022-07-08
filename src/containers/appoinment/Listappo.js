@@ -5,7 +5,7 @@ import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'react
 
 function Listappo(props) {
     const history = useHistory();
-    let [data, setData] = useState([]);
+    const [data, setData] = useState([]);
 
     const gData = () => {
         let localData = localStorage.getItem("book-apt");
@@ -28,12 +28,9 @@ function Listappo(props) {
         gData();
     }
 
-    const redirectB_app = (id) => {
-        history.push("/Book_apt", history.location.state);
-        // console.log(this.props.location.state.id);
-        // console.log(id);
-        console.log(history, id, history.location.state);
-    }
+    // const redirectB_app = (id) => {
+    //     history.push("/Book_apt");
+    // }
 
     return (
         <div>
@@ -69,7 +66,7 @@ function Listappo(props) {
                                                 <CardText>
                                                     {d.phone}
                                                 </CardText>
-                                                <Button onClick={() => redirectB_app(d.id)}>Edit</Button>
+                                                <Button>Edit</Button>
                                                 <Button onClick={() => handleDelete(d.id)}>Delete</Button>
                                             </CardBody>
                                         </Card>
@@ -80,7 +77,7 @@ function Listappo(props) {
                     </div>
                 </section>
             </main>
-        </div>
+        </div >
     );
 }
 
