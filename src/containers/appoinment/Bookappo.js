@@ -29,13 +29,13 @@ function Appointment(props) {
                 return d;
             }
         })
-        // localStorage.setItem("book-apt",JSON.stringify(uData));
-        // console.log(values,localData,uData);
+        localStorage.setItem("book-apt",JSON.stringify(uData));
+        console.log(uData);
 
-        // history.push("/list_apt");
-        // formik.resetForm();
-        // history.replace();
-        // setUpdate(false);
+        history.push("/list_apt");
+        formik.resetForm();
+        history.replace();
+        setUpdate(false);
     }
 
     let schema = yup.object().shape({
