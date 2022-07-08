@@ -8,9 +8,11 @@ function Listappo(props) {
     const [data, setData] = useState([]);
 
     const gData = () => {
-        let localData = localStorage.getItem("book-apt");
+        let localData = JSON.parse(localStorage.getItem("book-apt"));
 
-        setData(localData);
+        if (localData !== null) {
+            setData(localData);
+        }
     }
 
     useEffect(() => {
@@ -28,9 +30,9 @@ function Listappo(props) {
         gData();
     }
 
-    // const redirectB_app = (id) => {
-    //     history.push("/Book_apt");
-    // }
+    const redirectB_app = (id) => {
+        history.push("/Book_apt",{id : id});
+    }
 
     return (
         <div>
@@ -48,10 +50,10 @@ function Listappo(props) {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            {
-                                data.map((d, i) => {
-                                    return (
+                        {
+                            data.map((d, i) => {
+                                return (
+                                    <div>
                                         <Card key={i}>
                                             <CardBody>
                                                 <CardTitle tag="h5">
@@ -66,14 +68,14 @@ function Listappo(props) {
                                                 <CardText>
                                                     {d.phone}
                                                 </CardText>
-                                                <Button>Edit</Button>
+                                                <Button onClick={() => redirectB_app(d.id)}>Edit</Button>
                                                 <Button onClick={() => handleDelete(d.id)}>Delete</Button>
                                             </CardBody>
                                         </Card>
-                                    )
-                                })
-                            }
-                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </section>
             </main>
