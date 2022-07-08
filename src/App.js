@@ -3,7 +3,6 @@ import './App.css';
 import Header from './compoents/header/Header';
 import Footer from './compoents/footer/Footer';
 import Home from './containers/home/Home';
-import { Route, Switch } from 'react-router-dom';
 import Department from './containers/department/Department';
 import Doctor from './containers/doctors/Doctor';
 import Aboutus from './containers/about us/Aboutus';
@@ -14,6 +13,7 @@ import Refexample from './containers/refexample/Refexample';
 import Apponiment from './containers/appoinment/Bookappo';
 import Bookappo from './containers/appoinment/Bookappo';
 import Listappo from './containers/appoinment/Listappo';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
