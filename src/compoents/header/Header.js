@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { themeContext } from '../../context/ThemeContext';
 
 function Header(props) {
+    const value = useContext(themeContext);
+
+    console.log(value);
+
     return (
         <div className="main-header">   
-            <div id="topbar" className="d-flex align-items-center fixed-top">
+            <div id="topbar" className={`d-flex align-items-center fixed-top ${value.theme}`}>
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
                         <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
@@ -16,6 +21,9 @@ function Header(props) {
                         <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                         <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
                     </div>
+                    <button onClick={() => value.toggle_theme(value.theme)}>
+                        Change Theme
+                    </button>
                 </div>
             </div>
             <header id="header" className="fixed-top">
