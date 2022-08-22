@@ -17,26 +17,30 @@ import Login from './containers/login/Login';
 import PubilcRoute from './Route/PubilcRoute';
 import PrivateRoute from './Route/PrivateRoute';
 import ToggleThemecontext from './context/ThemeContext';
+import { Provider } from 'react-redux';
+import { store } from './redux/Store';
 
 function App() {
   return (
     <div>
-      <ToggleThemecontext>
-        <Header />
-        <Switch>
-          <PubilcRoute path={"/"} exact component={Home}></PubilcRoute>
-          <PubilcRoute path={"/department"} exact component={Department}></PubilcRoute>
-          <PubilcRoute path={"/doctors"} exact component={Doctor}></PubilcRoute>
-          <PubilcRoute path={"/aboutus"} exact component={Aboutus}></PubilcRoute>
-          <PubilcRoute path={"/contact"} exact component={Contact}></PubilcRoute>
-          <PubilcRoute restricted={true} path={"/Login"} exact component={Login}></PubilcRoute>
-          <Route path={"/medicines"} exact component={Medicines} ></Route>
-          <Route path={"/refexample"} exact component={Refexample}></Route>
-          <PrivateRoute path={"/Book_apt"} exact component={Bookappo}></PrivateRoute>
-          <PrivateRoute path={"/list_apt"} exact component={Listappo}></PrivateRoute>
-        </Switch>
-        <Footer />
-      </ToggleThemecontext>
+      <Provider store={store}>
+        <ToggleThemecontext>
+          <Header />
+          <Switch>
+            <PubilcRoute path={"/"} exact component={Home}></PubilcRoute>
+            <PubilcRoute path={"/department"} exact component={Department}></PubilcRoute>
+            <PubilcRoute path={"/doctors"} exact component={Doctor}></PubilcRoute>
+            <PubilcRoute path={"/aboutus"} exact component={Aboutus}></PubilcRoute>
+            <PubilcRoute path={"/contact"} exact component={Contact}></PubilcRoute>
+            <PubilcRoute restricted={true} path={"/Login"} exact component={Login}></PubilcRoute>
+            <Route path={"/medicines"} exact component={Medicines} ></Route>
+            <Route path={"/refexample"} exact component={Refexample}></Route>
+            <PrivateRoute path={"/Book_apt"} exact component={Bookappo}></PrivateRoute>
+            <PrivateRoute path={"/list_apt"} exact component={Listappo}></PrivateRoute>
+          </Switch>
+          <Footer />
+        </ToggleThemecontext>
+      </Provider>
     </div>
   );
 }
