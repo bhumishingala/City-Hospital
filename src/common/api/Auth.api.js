@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -14,10 +14,10 @@ export const SignUpapi = (data) => {
                 onAuthStateChanged(auth, (user) => {
                     sendEmailVerification(auth.currentUser)
                         .then(() => {
-                           resolve({payload : "Check Your Email."});
+                            resolve({ payload: "Check Your Email." });
                         })
                         .catch((e) => {
-                            reject({payload : e});
+                            reject({ payload: e });
                         })
                 });
             })
@@ -26,13 +26,44 @@ export const SignUpapi = (data) => {
                 const errorMessage = error.message;
 
                 if (errorCode.localeCompare("auth/email-already-in-use") == 0) {
-                        reject({payload : "Email is Already Verified"});                
+                    resolve({ payload: "Email is Already Verified" });
                 } else {
-                    reject({payload : errorMessage});
+                    reject({ payload: errorCode });
                 }
-
-                console.log(error);
             });
 
+    })
+}
+
+export const SignInapi = (data) => {
+    console.log("SignInapi", data);
+
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                if (user.emailVerified) {
+                    reject({ payload: "Login Is Succesfully" });
+                } else {
+                    reject({ payload: "First Is Email Varify." });
+                }
+
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                if (errorCode.localeCompare("auth/wrong-password") == 0) {
+                    reject({ payload: "Please Check Your Email." });
+                } else if (errorCode.localeCompare("auth/user-not-found") == 0) {
+                    reject({ payload: "Please Check Your Password" });
+                } else {
+                    reject({ payload: errorCode });
+                }
+
+
+            });
     })
 }
