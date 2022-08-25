@@ -26,7 +26,7 @@ export const SignUpapi = (data) => {
                 const errorMessage = error.message;
 
                 if (errorCode.localeCompare("auth/email-already-in-use") == 0) {
-                    resolve({ payload: "Email is Already Verified" });
+                    reject({ payload: "Email is Already Verified" });
                 } else {
                     reject({ payload: errorCode });
                 }
@@ -44,9 +44,9 @@ export const SignInapi = (data) => {
                 const user = userCredential.user;
 
                 if (user.emailVerified) {
-                    reject({ payload: "Login Is Succesfully" });
+                    resolve({ payload: "Login Is Succesfully" });
                 } else {
-                    reject({ payload: "First Is Email Varify." });
+                    resolve({ payload: "First Is Email Varify." });
                 }
 
                 console.log(user);
@@ -56,9 +56,9 @@ export const SignInapi = (data) => {
                 const errorMessage = error.message;
 
                 if (errorCode.localeCompare("auth/wrong-password") == 0) {
-                    reject({ payload: "Please Check Your Email." });
+                    reject({ payload: "Email or Password Wrong" });
                 } else if (errorCode.localeCompare("auth/user-not-found") == 0) {
-                    reject({ payload: "Please Check Your Password" });
+                    reject({ payload: "Password Wrong" });
                 } else {
                     reject({ payload: errorCode });
                 }
