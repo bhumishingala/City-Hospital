@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { themeContext } from '../../context/ThemeContext';
+import { signOutAction } from '../../redux/action/auth.action';
 import Alert from '../alert/Alert';
 
 function Header(props) {
     const value = useContext(themeContext);
 
+    const dispatch = useDispatch();
     console.log(value);
 
     return (
-        <div className="main-header">   
+        <div className="main-header">
             <div id="topbar" className={`d-flex align-items-center fixed-top ${value.theme}`}>
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
@@ -63,6 +66,9 @@ function Header(props) {
                     <NavLink to="/Login" className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink>
+                    {/* <NavLink to="/Login" className="appointment-btn scrollto"> */}
+                        <span className="appointment-btn scrollto d-none d-md-inline" onClick={() => { dispatch(signOutAction()) }}>Logout</span>
+                    {/* </NavLink> */}
                 </div>
             </header>
         </div>
