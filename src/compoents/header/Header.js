@@ -1,5 +1,6 @@
+import userEvent from '@testing-library/user-event';
 import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { themeContext } from '../../context/ThemeContext';
 import { signOutAction } from '../../redux/action/auth.action';
@@ -9,6 +10,8 @@ function Header(props) {
     const value = useContext(themeContext);
 
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+
     console.log(value);
 
     return (
@@ -63,12 +66,21 @@ function Header(props) {
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
                     <NavLink className="appointment-btn scrollto" to="/Book_apt"><span className="d-none d-md-inline"></span>Make an Appointment</NavLink>
-                    <NavLink to="/Login" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>
-                    {/* <NavLink to="/Login" className="appointment-btn scrollto"> */}
-                        <span className="appointment-btn scrollto d-none d-md-inline" onClick={() => { dispatch(signOutAction()) }}>Logout</span>
-                    {/* </NavLink> */}
+                    {
+                        auth.user === null ?
+                            <NavLink to="/Login" className="appointment-btn scrollto">
+                                <span className="d-none d-md-inline">Login/ Signup</span>
+                            </NavLink>
+                            :
+                            auth.user !== '' ?
+                                <NavLink to="/" className="appointment-btn scrollto">
+                                    <span className="d-none d-md-inline" onClick={() => { dispatch(signOutAction()) }}>Logout</span>
+                                </NavLink>
+                                :
+                                <NavLink to="/Login" className="appointment-btn scrollto">
+                                    <span className="d-none d-md-inline">Login/ Signup</span>
+                                </NavLink>
+                    }
                 </div>
             </header>
         </div>

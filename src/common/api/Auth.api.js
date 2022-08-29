@@ -44,7 +44,7 @@ export const SignInapi = (data) => {
                 const user = userCredential.user;
 
                 if (user.emailVerified) {
-                    resolve({ payload: "Login Is Succesfully" });
+                    resolve({ payload: user });
                 } else {
                     resolve({ payload: "First Is Email Varify." });
                 }
@@ -69,7 +69,7 @@ export const SignInapi = (data) => {
 }
 
 export const SignOutapi = () => {
-    console.log("data");
+    console.log("SignInapi");
 
     return new Promise((resolve,reject) => {
         signOut(auth)
