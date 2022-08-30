@@ -72,14 +72,9 @@ function Header(props) {
                                 <span className="d-none d-md-inline">Login/ Signup</span>
                             </NavLink>
                             :
-                            auth.user !== '' ?
-                                <NavLink to="/" className="appointment-btn scrollto">
-                                    <span className="d-none d-md-inline" onClick={() => { dispatch(signOutAction()) }}>Logout</span>
-                                </NavLink>
-                                :
-                                <NavLink to="/Login" className="appointment-btn scrollto">
-                                    <span className="d-none d-md-inline">Login/ Signup</span>
-                                </NavLink>
+                            <NavLink to="/" className="appointment-btn scrollto">
+                                <span className="d-none d-md-inline" onClick={() => { dispatch(signOutAction()) }}>Logout</span>
+                            </NavLink>
                     }
                 </div>
             </header>

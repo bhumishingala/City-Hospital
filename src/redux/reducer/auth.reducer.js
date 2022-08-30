@@ -16,11 +16,11 @@ export const authReducer = (state = initVal, action) => {
                 user : action.payload,
                 error : ''
             }
-        case ActionType.SIGN_OUT : 
+        case ActionType.SIGNED_OUT : 
             return {
                 ...state,
                 isLoading : false,
-                user : '',
+                user : null,
                 error : ''
             }
         default :
