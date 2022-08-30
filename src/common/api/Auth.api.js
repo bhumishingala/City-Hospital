@@ -81,3 +81,7 @@ export const SignOutapi = () => {
             })
     })
 }
+
+export const ForgotPassApi = (data) => {
+    console.log(data);
+}

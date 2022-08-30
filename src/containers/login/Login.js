@@ -2,7 +2,7 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
-import { signInAction, signUpAction } from '../../redux/action/auth.action';
+import { forgotPassWordAction, signInAction, signUpAction } from '../../redux/action/auth.action';
 
 function Login(props) {
     const [usertype, setUsertype] = useState("Login");
@@ -55,12 +55,12 @@ function Login(props) {
 
         // console.log(values);
         dispatch(signUpAction(values));
-
     }
 
     const handleLogin = (values) => {
         // localStorage.setItem("User", "123");
         dispatch(signInAction(values));
+                // dispatch(forgotPassWordAction(values));
     }
 
     const formik = useFormik({
