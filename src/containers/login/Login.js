@@ -6,11 +6,11 @@ import { forgotPassWordAction, GoogleWithSignin, signInAction, signUpAction } fr
 
 function Login(props) {
     const [usertype, setUsertype] = useState("Login");
-    const [reset, setReset] = useState("false");
+    const [reset, setReset] = useState(false);
 
     let schemaObj, initval;
 
-    if (usertype === "Login") {
+    if (usertype === "Login" && reset === false) {
         schemaObj = {
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
             password: yup.string().required("Please Enter Password.")
@@ -19,7 +19,7 @@ function Login(props) {
             email: '',
             password: ''
         }
-    } else if (usertype === "Signup") {
+    } else if (usertype === "Signup"  && reset === false) {
         schemaObj = {
             name: yup.string().required("Please enter Name."),
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id."),
@@ -30,7 +30,7 @@ function Login(props) {
             email: '',
             password: ''
         }
-    } else if (reset == "true") {
+    } else if (reset == true) {
         schemaObj = {
             email: yup.string().required("Please Enter Email Id.").email("Please Enter Vaild email Id.")
         }
@@ -60,7 +60,6 @@ function Login(props) {
     const handleLogin = (values) => {
         // localStorage.setItem("User", "123");
         dispatch(signInAction(values));
-        // dispatch(forgotPassWordAction(values));
     }
 
     const handleSignWithGoogle = () => {
@@ -71,10 +70,12 @@ function Login(props) {
         initialValues: initval,
         validationSchema: schema,
         onSubmit: values => {
-            if (usertype === "Login") {
+            if (usertype === "Login" && reset === false) {
                 handleLogin(values);
-            } else {
+            } else if(usertype === "Login" && reset == false){
                 insertData(values);
+            }else if(reset === true){
+                dispatch(forgotPassWordAction(values));
             }
         },
 
@@ -83,12 +84,14 @@ function Login(props) {
 
     const { handleChange, errors, handleSubmit, handleBlur, touched } = formik;
 
+    // console.log(errors);
+
     return (
         <section id="appointment" className="appointment">
             <div className="container">
                 <div className="section-title">
                     {
-                        reset === "true" ?
+                        reset === true ?
                             <h2>Forgot Password</h2>
                             :
                             usertype === "Login" ?
@@ -101,7 +104,7 @@ function Login(props) {
                     <Form onSubmit={handleSubmit} className="php-email-form">
                         <div className="row">
                             {
-                                reset === "true" ?
+                                reset === true ?
                                     null
                                     :
                                     usertype === "Login" ?
@@ -121,7 +124,7 @@ function Login(props) {
                             </div>
                         </div>
                         {
-                            reset === "true" ?
+                            reset === true ?
                                 null
                                 :
                                 <div className='row'>
@@ -132,7 +135,7 @@ function Login(props) {
                                 </div>
                         }
                         {
-                            reset === "true" ?
+                            reset === true ?
                                 <div className="text-center"><button type="submit">Submit</button></div>
                                 :
                                 usertype === "Login" ?
@@ -149,7 +152,7 @@ function Login(props) {
                                 :
                                 <p className='mt-4'>allready account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Login") }}>Login</a></p>
                         }
-                        <a class='text-orange' onClick={() => setReset("true")}>Forgot Your Password ?</a>
+                        <a class='text-orange' onClick={() => setReset(true)}>Forgot Your Password ?</a>
                     </Form>
                 </Formik>
             </div>

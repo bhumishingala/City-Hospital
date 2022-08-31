@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -74,10 +74,10 @@ export const SignOutapi = () => {
     return new Promise((resolve,reject) => {
         signOut(auth)
             .then(() => {
-                resolve({payload : "Logout SuccessFully"})
+                resolve({payload : "Logout SuccessFully" })
             })
             .catch(() => {
-                reject({payload : "SomeThing Is Worng"});
+                reject({payload : "SomeThing Is Worng" });
             })
     })
 }
@@ -100,6 +100,23 @@ export const googleWithSigninApi = () => {
                 const email = error.customData.email;
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 reject({ payload: error })
+            });
+    })
+}
+
+export const ForgotPassApi = (data) => {
+    console.log(data);
+
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+            .then(() => {
+                resolve({payload : "Forgot PassWord SuccessFully and Check Your Email"})
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                reject({payload : "Email Is Wrong"})
+                console.log(errorCode);
             });
     })
 }
