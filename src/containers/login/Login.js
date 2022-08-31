@@ -60,17 +60,21 @@ function Login(props) {
     const handleLogin = (values) => {
         // localStorage.setItem("User", "123");
         dispatch(signInAction(values));
-                // dispatch(forgotPassWordAction(values));
+        // dispatch(forgotPassWordAction(values));
+    }
+
+    const handleSignWithGoogle = () => {
+        dispatch(GoogleWithSignin());
     }
 
     const formik = useFormik({
         initialValues: initval,
         validationSchema: schema,
         onSubmit: values => {
-            if(usertype === "Login"){
+            if (usertype === "Login") {
                 handleLogin(values);
-            }else{
-                insertData(values); 
+            } else {
+                insertData(values);
             }
         },
 
@@ -138,7 +142,10 @@ function Login(props) {
                         }
                         {
                             usertype === "Login" ?
-                                <p className='mt-4'>create an account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</a></p>
+                                <>
+                                    <p className='mt-4'>create an account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Signup") }}>Signup</a></p>
+                                    <div className="text-center"><button type="submit" onClick={() => handleSignWithGoogle()}>LoginWithGoogle</button></div>
+                                </>
                                 :
                                 <p className='mt-4'>allready account ?<a class="sign-up" onClick={() => { setReset("false"); setUsertype("Login") }}>Login</a></p>
                         }

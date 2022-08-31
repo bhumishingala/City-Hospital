@@ -52,6 +52,20 @@ function* forgotPassword(action) {
   }
 }
 
+function* googlewithSignin(action) {
+  try {
+    const user = yield call(googleWithSigninApi, action.payload);
+    yield put(signedInAction(user))
+    history.push('/');
+    yield put(setAlert({ text:"Login Is SuccessFully", color: "success" }))
+    console.log(user);
+  } catch (e) {
+    yield put(setAlert({ text: e.payload, color: "error" }))
+    console.log(e);
+  }
+}
+
+
 function* watchSignUp() {
   yield takeEvery(ActionType.SIGN_UP, SignUp);
 }
@@ -68,11 +82,16 @@ function* watchForgotPass() {
   yield takeEvery(ActionType.FORGOT_PASSWORD , forgotPassword)
 }
 
+function* watchGoogleWithSignin() {
+  yield takeEvery(ActionType.GOOGLESIGN_IN, googlewithSignin)
+}
+
 export function* signUpSaga() {
   yield all([
     watchSignUp(),
     watchSignIn(),
     watchSignOut(),
-    watchForgotPass()
+    watchForgotPass(),
+    watchGoogleWithSignin()
   ])
 }

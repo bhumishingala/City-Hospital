@@ -23,3 +23,7 @@ export const signedOutAction = () => (dispatch) => {
 export const forgotPassWordAction = (data) => (dispatch) => {
     dispatch({type : ActionType.FORGOT_PASSWORD , payload : data})
 }
+
+export const GoogleWithSignin = () => (dispatch) => {
+    dispatch({type : ActionType.GOOGLESIGN_IN})
+} 
