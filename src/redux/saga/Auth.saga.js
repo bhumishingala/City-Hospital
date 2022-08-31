@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { ForgotPassApi, SignInapi, SignOutapi, SignUpapi } from '../../common/api/Auth.api';
+import { ForgotPassApi, googleWithSigninApi, SignInapi, SignOutapi, SignUpapi } from '../../common/api/Auth.api';
 import { history } from '../../history';
 import { setAlert } from '../action/alert.action';
 import { signedInAction, signedOutAction } from '../action/auth.action';
@@ -44,10 +44,14 @@ function* SignOut(action) {
 }
 
 function* forgotPassword(action) {
-  try{
-    const user = yield call(ForgotPassApi , action.payload)
+  try {
+    const user = yield call(ForgotPassApi, action.payload)
+    yield put(signedInAction(user))
+    history.push('/');
+    yield put(setAlert({ text: user.payload, color: "success" }))
     console.log(user);
-  }catch(e){
+  } catch (e) {
+    yield put(setAlert({ text: e.payload, color: "error" }))
     console.log(e);
   }
 }
@@ -65,7 +69,7 @@ function* watchSignOut() {
 }
 
 function* watchForgotPass() {
-  yield takeEvery(ActionType.FORGOT_PASSWORD , forgotPassword)
+  yield takeEvery(ActionType.FORGOT_PASSWORD, forgotPassword)
 }
 
 export function* signUpSaga() {

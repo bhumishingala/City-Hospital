@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -71,17 +71,32 @@ export const SignInapi = (data) => {
 export const SignOutapi = () => {
     console.log("SignInapi");
 
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         signOut(auth)
             .then(() => {
-                resolve({payload : "Logout SuccessFully"})
+                resolve({ payload: "Logout SuccessFully" })
             })
             .catch(() => {
-                reject({payload : "SomeThing Is Worng"});
+                reject({ payload: "SomeThing Is Worng" });
             })
     })
 }
 
 export const ForgotPassApi = (data) => {
     console.log(data);
+
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+            .then(() => {
+                resolve({payload : "Forgot PassWord SuccessFully"})
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                reject({payload : "Email Is Wrong"})
+                console.log(errorCode);
+            });
+    })
 }
+
+
